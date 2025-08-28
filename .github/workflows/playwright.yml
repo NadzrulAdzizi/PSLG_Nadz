@@ -5,6 +5,11 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        shardIndex: [1, 2, 3, 4]   # 4 shards
+        shardTotal: [4]            # total number of shards
+
     steps:
       - uses: actions/checkout@v3
 
@@ -16,16 +21,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
       - name: Start React dev server
         run: npm run start &
-      
-      - name: Run Playwright Tests
-        run: npx playwright test
+
+      - name: Run Playwright Tests (sharded)
+        run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload Playwright Report
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.shardIndex }}
           path: playwright-report
 
     env:
