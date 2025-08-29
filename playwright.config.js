@@ -12,9 +12,9 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000', // React app dev server
     headless: false,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    trace: 'on',
+    screenshot: 'on',
+    video: 'on',
     //storageState: 'storageState.json',
   },
   projects: [
