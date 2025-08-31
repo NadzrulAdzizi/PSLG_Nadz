@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        shardIndex: [1, 2, 3, 4]   # 4 shards
-        shardTotal: [4]            # total number of shards
+        shardIndex: [1, 2, 3, 4]   # shard into 4 parts
+        shardTotal: [4]
 
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,10 @@ jobs:
       - name: Start React dev server
         run: npm run start &
 
-      - name: Run Playwright Tests (sharded)
+      - name: Start MCP server
+        run: npm run mcp:server &
+
+      - name: Run Playwright Tests (sharded across browsers)
         run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload Playwright Report
@@ -36,6 +39,13 @@ jobs:
         with:
           name: playwright-report-${{ matrix.shardIndex }}
           path: playwright-report
+
+      - name: Upload Playwright Traces/Videos
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-artifacts-${{ matrix.shardIndex }}
+          path: test-results/
 
     env:
       TEST_EMAIL: ${{ secrets.TEST_EMAIL }}

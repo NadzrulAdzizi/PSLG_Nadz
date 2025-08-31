@@ -6,13 +6,26 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "```bash npm install npx playwright test",
   "devDependencies": {
+    "@executeautomation/playwright-mcp-server": "^1.0.6",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.0"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
     "mailslurp-client": "^16.0.0"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NadzrulAdzizi/PSLG_Nadz.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NadzrulAdzizi/PSLG_Nadz/issues"
+  },
+  "homepage": "https://github.com/NadzrulAdzizi/PSLG_Nadz#readme"
 }
