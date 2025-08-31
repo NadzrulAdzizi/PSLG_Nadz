@@ -50,4 +50,6 @@ jobs:
     env:
       TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-      MAILINATOR_TOKEN: ${{ secrets.MAILINATOR_TOKEN }}
+      TEST_EMAIL_PART3: ${{ secrets.TEST_EMAIL_PART3 }}
+      TEST_PASSWORD_PART3: ${{ secrets.TEST_PASSWORD_PART3 }}
+      MAILSLURP_API_KEY: ${{ secrets.MAILSLURP_API_KEY }}
